@@ -131,6 +131,6 @@ public class Gui {
 		minimalise_button.setBounds(1179, 0, 50, 50);
 		minimalise_button.addActionListener(e -> frame.setState(frame.ICONIFIED));
 		frame.getContentPane().add(minimalise_button);
-		minimalise_button.setBorderPainted(false);
+		
 	}
 }
