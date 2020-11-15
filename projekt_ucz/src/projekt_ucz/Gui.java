@@ -76,13 +76,13 @@ public class Gui {
 		my_account_button.setIcon(new ImageIcon(Gui.class.getResource("/projekt_ucz/icons/my_account.png")));
 		my_account_button.setBounds(0, 206, 241, 60);
 		my_account_button.setSize(258, 60);
-		my_account_button.setBorderPainted(false);
+		//my_account_button.setBorderPainted(false);
 		panel.add(my_account_button);
 		
 		JButton my_music_button = new JButton("");
 		my_music_button.setIcon(new ImageIcon(Gui.class.getResource("/projekt_ucz/icons/my_music.png")));
 		my_music_button.setBounds(0, 262, 258, 60);
-		my_music_button.setBorderPainted(false);
+		//my_music_button.setBorderPainted(false);
 		panel.add(my_music_button);
 		
 		JButton shop_button = new JButton("");

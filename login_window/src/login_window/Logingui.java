@@ -58,7 +58,7 @@ public class Logingui {
 		frame.getContentPane().setLayout(null);
 		
 		JLabel photo_panel = new JLabel("");
-		photo_panel.setIcon(new ImageIcon(Logingui.class.getResource("/login_window/musvix_panel_new.png")));
+		photo_panel.setIcon(new ImageIcon(Logingui.class.getResource("/login_window/musvix_15.11.png")));
 		photo_panel.setBounds(0, 23, 660, 600);
 		frame.getContentPane().add(photo_panel);
 		
@@ -74,6 +74,10 @@ public class Logingui {
 		sign_up_button.setBorderPainted(false);
 		
 		JButton log_in_button = new JButton("");
+		log_in_button.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+			}
+		});
 		log_in_button.setIcon(new ImageIcon(Logingui.class.getResource("/login_window/login_button.png")));
 		log_in_button.setBounds(0, 710, 97, 25);
 		frame.getContentPane().add(log_in_button);
