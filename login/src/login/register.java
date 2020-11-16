@@ -9,7 +9,6 @@ import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.JPasswordField;
-import javax.swing.JRadioButton;
 
 import login_window.Logingui;
 import javax.swing.JLabel;
@@ -20,13 +19,13 @@ import java.awt.Component;
 import javax.swing.Box;
 import java.awt.SystemColor;
 import javax.swing.JSeparator;
-
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import javax.swing.JRadioButton;
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
 
-public class login_panel {
+public class register {
 
 	private JFrame frame;
 	private JTextField login_field;
@@ -39,7 +38,7 @@ public class login_panel {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					login_panel window = new login_panel();
+					register window = new register();
 					window.frame.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
@@ -51,7 +50,7 @@ public class login_panel {
 	/**
 	 * Create the application.
 	 */
-	public login_panel() {
+	public register() {
 		initialize();
 	}
 
@@ -75,7 +74,7 @@ public class login_panel {
 		
 		
 		JButton exit_button = new JButton("");
-		exit_button.setIcon(new ImageIcon(login_panel.class.getResource("/login/exit_button.png")));
+		exit_button.setIcon(new ImageIcon(register.class.getResource("/login/exit_button.png")));
 		exit_button.setBounds(620, 0, 47, 25);
 		frame.getContentPane().add(exit_button);
 		exit_button.setSize(40, 20);
@@ -83,7 +82,7 @@ public class login_panel {
 		exit_button.addActionListener(e -> System.exit(0));
 		
 		JButton minimal_button = new JButton("");
-		minimal_button.setIcon(new ImageIcon(login_panel.class.getResource("/login/minimal_button.png")));
+		minimal_button.setIcon(new ImageIcon(register.class.getResource("/login/minimal_button.png")));
 		minimal_button.setBounds(579, 0, 97, 25);
 		frame.getContentPane().add(minimal_button);
 		minimal_button.addActionListener(e -> frame.setState(frame.ICONIFIED));
@@ -114,7 +113,7 @@ public class login_panel {
 		JLabel user_ico = new JLabel("");
 		user_ico.setBounds(106, 305, 65, 26);
 		frame.getContentPane().add(user_ico);
-		user_ico.setIcon(new ImageIcon(login_panel.class.getResource("/login/user.png")));
+		user_ico.setIcon(new ImageIcon(register.class.getResource("/login/user.png")));
 		user_ico.setSize(40,26);
 		
 		JSeparator separator_login = new JSeparator();
@@ -145,7 +144,7 @@ public class login_panel {
 		frame.getContentPane().add(password_field);
 		
 		JLabel pass_ico = new JLabel("");
-		pass_ico.setIcon(new ImageIcon(login_panel.class.getResource("/login/password.png")));
+		pass_ico.setIcon(new ImageIcon(register.class.getResource("/login/password.png")));
 		pass_ico.setBounds(107, 385, 40, 26);
 		frame.getContentPane().add(pass_ico);
 		
@@ -156,7 +155,7 @@ public class login_panel {
 		frame.getContentPane().add(separator_password);
 		
 		JButton login_button = new JButton("");
-		login_button.setIcon(new ImageIcon(login_panel.class.getResource("/login/login_button.png")));
+		login_button.setIcon(new ImageIcon(register.class.getResource("/login/sign_up_button.png")));
 		login_button.setForeground(new Color(0, 51, 102));
 		login_button.setBackground(new Color(0, 51, 102));
 		login_button.setBounds(106, 479, 420, 65);
@@ -164,31 +163,22 @@ public class login_panel {
 		frame.getContentPane().add(login_button);
 		
 		JButton login_fb_button = new JButton("");
-		login_fb_button.setIcon(new ImageIcon(login_panel.class.getResource("/login/login_fb_button.png")));
+		login_fb_button.setIcon(new ImageIcon(register.class.getResource("/login/register_fb_button.png")));
 		login_fb_button.setForeground(new Color(0, 51, 102));
 		login_fb_button.setBackground(new Color(0, 51, 102));
 		login_fb_button.setBounds(106, 578, 420, 65);
 		login_fb_button.setBorderPainted(false);
 		frame.getContentPane().add(login_fb_button);
 		
-		JButton forgot_pass_button = new JButton("Forgot password?");
-		forgot_pass_button.setForeground(SystemColor.textHighlightText);
-		forgot_pass_button.setFont(new Font("Source Sans Pro", Font.BOLD, 23));
-		forgot_pass_button.setBounds(120, 679, 420, 25);
-		forgot_pass_button.setSize(420, 25);
-		forgot_pass_button.setBorderPainted(false);
-		forgot_pass_button.setOpaque(false);
-		forgot_pass_button.setContentAreaFilled(false);
-		frame.getContentPane().add(forgot_pass_button);
-		
-		JButton donthaveacc_button = new JButton("I don't have an account. Sign up ");
-		donthaveacc_button.setFont(new Font("Source Sans Pro", Font.BOLD, 22));
-		donthaveacc_button.setForeground(SystemColor.textHighlightText);
-		donthaveacc_button.setBounds(120, 728, 420, 25);
-		donthaveacc_button.setBorderPainted(false);
-		donthaveacc_button.setOpaque(false);
-		donthaveacc_button.setContentAreaFilled(false);
-		frame.getContentPane().add(donthaveacc_button);
+		JButton haveacc_button = new JButton("Have an account? Log in");
+		haveacc_button.setForeground(SystemColor.textHighlightText);
+		haveacc_button.setFont(new Font("Source Sans Pro", Font.BOLD, 22));
+		haveacc_button.setBounds(106, 700, 420, 25);
+		haveacc_button.setSize(420, 25);
+		haveacc_button.setBorderPainted(false);
+		haveacc_button.setOpaque(false);
+		haveacc_button.setContentAreaFilled(false);
+		frame.getContentPane().add(haveacc_button);
 		
 		JRadioButton showpass_button = new JRadioButton("");
 		showpass_button.addActionListener(new ActionListener() {
@@ -210,7 +200,7 @@ public class login_panel {
 		frame.getContentPane().add(showpass_button);
 		
 		JLabel photo_panel = new JLabel("");
-		photo_panel.setIcon(new ImageIcon(login_panel.class.getResource("/login/jpanel_login.png")));
+		photo_panel.setIcon(new ImageIcon(register.class.getResource("/login/jpanel_login.png")));
 		photo_panel.setBounds(0, 23, 660, 800);
 		frame.getContentPane().add(photo_panel);
 		
