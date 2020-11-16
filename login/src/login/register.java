@@ -27,7 +27,7 @@ import java.awt.event.ActionEvent;
 
 public class register {
 
-	private JFrame frame;
+	JFrame frame;
 	private JTextField login_field;
 	private JTextField password_field;
 
@@ -171,6 +171,13 @@ public class register {
 		frame.getContentPane().add(login_fb_button);
 		
 		JButton haveacc_button = new JButton("Have an account? Log in");
+		haveacc_button.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				login_panel login_window = new login_panel();
+				login_window.frame.setVisible(true);
+				frame.dispose();
+			}
+		});
 		haveacc_button.setForeground(SystemColor.textHighlightText);
 		haveacc_button.setFont(new Font("Source Sans Pro", Font.BOLD, 22));
 		haveacc_button.setBounds(106, 700, 420, 25);

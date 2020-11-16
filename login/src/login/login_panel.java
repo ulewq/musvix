@@ -28,7 +28,7 @@ import java.awt.event.MouseEvent;
 
 public class login_panel {
 
-	private JFrame frame;
+	JFrame frame;
 	private JTextField login_field;
 	private JTextField password_field;
 
@@ -182,6 +182,13 @@ public class login_panel {
 		frame.getContentPane().add(forgot_pass_button);
 		
 		JButton donthaveacc_button = new JButton("I don't have an account. Sign up ");
+		donthaveacc_button.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				register register_panel = new register();
+				register_panel.frame.setVisible(true);
+				frame.dispose();
+			}
+		});
 		donthaveacc_button.setFont(new Font("Source Sans Pro", Font.BOLD, 22));
 		donthaveacc_button.setForeground(SystemColor.textHighlightText);
 		donthaveacc_button.setBounds(120, 728, 420, 25);
