@@ -66,6 +66,11 @@ public class Gui {
 		frame.setSize(1280, 720);
 		frame.setShape(new RoundRectangle2D.Double(1,1, 1280,720, 20,20));
 		
+		JPanel panel_1 = new JPanel();
+		panel_1.setBackground(new Color(0, 250, 154));
+		panel_1.setBounds(1258, 56, -997, 57);
+		frame.getContentPane().add(panel_1);
+		
 		JPanel panel = new JPanel();
 		panel.setBounds(0, 0, 264, 720);
 		panel.setBackground(new Color(230, 233, 237));
