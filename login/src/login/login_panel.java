@@ -156,6 +156,10 @@ public class login_panel {
 		frame.getContentPane().add(separator_password);
 		
 		JButton login_button = new JButton("");
+		login_button.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+			}
+		});
 		login_button.setIcon(new ImageIcon(login_panel.class.getResource("/login/login_button.png")));
 		login_button.setForeground(new Color(0, 51, 102));
 		login_button.setBackground(new Color(0, 51, 102));
