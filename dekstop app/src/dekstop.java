@@ -69,7 +69,7 @@ public class dekstop {
 		rewind_button.setBorderPainted(false);
 		rewind_button.setOpaque(false);
 		rewind_button.setContentAreaFilled(false);
-		rewind_button.setIcon(new ImageIcon(desktop.class.getResource("/desktop app/back.png")));
+		rewind_button.setIcon(new ImageIcon(dekstop.class.getResource("/dekstop app/back.png")));
 		
 		JPanel author_info_panel = new JPanel();
 		author_info_panel.setBackground(new Color(224, 217, 224));
