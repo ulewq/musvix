@@ -62,17 +62,57 @@ public class main_panel {
 		frame.getContentPane().setLayout(null);
 
 		JPanel change_panel = new JPanel();
-		change_panel.setBounds(280, 70, 1014, 752);
+		change_panel.setBounds(0, 70, 1294, 752);
 		frame.getContentPane().add(change_panel);
 		change_panel.setLayout(new CardLayout(0, 0));
 		
 		JPanel myacc_panel = new JPanel();
-		myacc_panel.setBackground(new Color(204, 51, 255));
+		myacc_panel.setBackground(new Color(204, 204, 204));
 		change_panel.add(myacc_panel, "account");
 		
 		JPanel mymusic_panel = new JPanel();
 		mymusic_panel.setBackground(new Color(255, 51, 204));
 		change_panel.add(mymusic_panel, "music");
+		mymusic_panel.setLayout(null);
+		
+		JPanel panel = new JPanel();
+		panel.setBounds(0, 0, 1014, 60);
+		mymusic_panel.add(panel);
+		panel.setLayout(null);
+		
+		JButton music_albums_button = new JButton("");
+		music_albums_button.setBounds(0, 0, 334, 60);
+		music_albums_button.setIcon(new ImageIcon(main_panel.class.getResource("/panel_glowny/albums_l.png")));
+		music_albums_button.setOpaque(false);
+		music_albums_button.setContentAreaFilled(false);
+		music_albums_button.setBorderPainted(false);
+		music_albums_button.setRolloverEnabled(true);
+		music_albums_button.setRolloverIcon(new ImageIcon(main_panel.class.getResource("/panel_glowny/albums_m.png")));
+		panel.add(music_albums_button);
+		
+		JButton music_albums_button_1 = new JButton("");
+		music_albums_button_1.setRolloverEnabled(true);
+		music_albums_button_1.setOpaque(false);
+		music_albums_button_1.setContentAreaFilled(false);
+		music_albums_button_1.setBorderPainted(false);
+		music_albums_button_1.setBounds(334, 0, 334, 60);
+		music_albums_button_1.setIcon(new ImageIcon(main_panel.class.getResource("/panel_glowny/albums_l.png")));
+		music_albums_button_1.setRolloverIcon(new ImageIcon(main_panel.class.getResource("/panel_glowny/albums_m.png")));
+		panel.add(music_albums_button_1);
+		
+		JButton music_albums_button_1_1 = new JButton("");
+		music_albums_button_1_1.setRolloverEnabled(true);
+		music_albums_button_1_1.setOpaque(false);
+		music_albums_button_1_1.setContentAreaFilled(false);
+		music_albums_button_1_1.setBorderPainted(false);
+		music_albums_button_1_1.setBounds(680, 0, 334, 60);
+		music_albums_button_1_1.setIcon(new ImageIcon(main_panel.class.getResource("/panel_glowny/albums_l.png")));
+		music_albums_button_1_1.setRolloverIcon(new ImageIcon(main_panel.class.getResource("/panel_glowny/albums_m.png")));
+		panel.add(music_albums_button_1_1);
+		
+		JPanel panel_1 = new JPanel();
+		panel_1.setBounds(0, 60, 1014, 692);
+		mymusic_panel.add(panel_1);
 		
 		JPanel shop_panel = new JPanel();
 		shop_panel.setBackground(new Color(200, 226, 234));
@@ -224,34 +264,10 @@ public class main_panel {
 		speaker_image.setBounds(1040, 8, 30, 30);
 		player_panel.add(speaker_image);
 		
-		JPanel author_info_panel = new JPanel();
-		author_info_panel.setBackground(new Color(64, 168, 196));
-		author_info_panel.setBounds(0, 70, 280, 752);
-		frame.getContentPane().add(author_info_panel);
-		author_info_panel.setLayout(null);
-		
-		JLabel author_image = new JLabel("");
-		author_image.setIcon(new ImageIcon(main_panel.class.getResource("/panel_glowny/bayer-full.png")));
-		author_image.setBounds(40, 142, 200, 180);
-		author_info_panel.add(author_image);
-		
-		JLabel lblNewLabel_2 = new JLabel("New label");
-		lblNewLabel_2.setBounds(0, 682, 180, 140);
-		author_info_panel.add(lblNewLabel_2);
-		
-		JTextPane author_description = new JTextPane();
-		author_description.setBackground(new Color(64, 168, 196));
-		author_description.setEditable(false);
-		author_description.setFont(new Font("Source Sans Pro", Font.PLAIN, 16));
-		author_description.setText("Najstarszy i jeden z najpopularniejszych zespo\u0142\u00F3w nurtu polskiej muzyki tanecznej. Liderem i wokalist\u0105 zespo\u0142u jest S\u0142awomir \u015Awierzy\u0144ski. Grupa ma w swoim dorobku siedem p\u0142yt, jak sama podaje sprzedanych w \u0142\u0105cznym nak\u0142adzie 16 milion\u00F3w egzemplarzy.");
-		author_description.setBounds(40, 383, 200, 240);
-		author_description.setOpaque(false);
-		author_info_panel.add(author_description);
-		
 		JPanel menu_panel = new JPanel();
-		menu_panel.setBounds(280, 0, 1020, 70);
+		menu_panel.setBounds(280, 0, 1014, 70);
 		frame.getContentPane().add(menu_panel);
-		menu_panel.setBackground(new Color(64, 168, 196));
+		menu_panel.setBackground(new Color(31, 33, 38));
 		menu_panel.setLayout(null);
 		
 		JButton myaccount_button = new JButton("");
@@ -268,7 +284,7 @@ public class main_panel {
 				
 			}});
 		myaccount_button.setIcon(new ImageIcon(main_panel.class.getResource("/panel_glowny/my_account.png")));
-		myaccount_button.setBounds(0, 10, 204, 50);
+		myaccount_button.setBounds(0, 13, 204, 50);
 		myaccount_button.setBorderPainted(false);
 		myaccount_button.setOpaque(false);
 		myaccount_button.setContentAreaFilled(false);
@@ -293,7 +309,7 @@ public class main_panel {
 		mymusic_button.setOpaque(false);
 		mymusic_button.setContentAreaFilled(false);
 		mymusic_button.setBorderPainted(false);
-		mymusic_button.setBounds(216, 10, 204, 50);
+		mymusic_button.setBounds(230, 13, 204, 50);
 		mymusic_button.setRolloverEnabled(true);
 		mymusic_button.setRolloverIcon(new ImageIcon(main_panel.class.getResource("/panel_glowny/mymusic-hover.png")));
 		menu_panel.add(mymusic_button);
@@ -314,7 +330,7 @@ public class main_panel {
 		shop_button.setOpaque(false);
 		shop_button.setContentAreaFilled(false);
 		shop_button.setBorderPainted(false);
-		shop_button.setBounds(417, 10, 204, 50);
+		shop_button.setBounds(460, 13, 204, 50);
 		shop_button.setRolloverEnabled(true);
 		shop_button.setRolloverIcon(new ImageIcon(main_panel.class.getResource("/panel_glowny/shop-hover.png")));
 		menu_panel.add(shop_button);
@@ -335,7 +351,7 @@ public class main_panel {
 		settings_button.setOpaque(false);
 		settings_button.setContentAreaFilled(false);
 		settings_button.setBorderPainted(false);
-		settings_button.setBounds(623, 10, 204, 50);
+		settings_button.setBounds(647, 13, 204, 50);
 		settings_button.setRolloverEnabled(true);
 		settings_button.setRolloverIcon(new ImageIcon(main_panel.class.getResource("/panel_glowny/settings-hover.png")));
 		menu_panel.add(settings_button);
@@ -345,19 +361,27 @@ public class main_panel {
 		logout_button.setOpaque(false);
 		logout_button.setContentAreaFilled(false);
 		logout_button.setBorderPainted(false);
-		logout_button.setBounds(828, 10, 204, 50);
+		logout_button.setBounds(810, 13, 204, 50);
 		logout_button.setRolloverEnabled(true);
 		logout_button.setRolloverIcon(new ImageIcon(main_panel.class.getResource("/panel_glowny/logout-hover.png")));
 		menu_panel.add(logout_button);
 		
 		JPanel logo_panel = new JPanel();
-		logo_panel.setBackground(new Color(64, 168, 196));
+		logo_panel.setBackground(new Color(204, 204, 204));
 		logo_panel.setBounds(0, 0, 280, 70);
 		frame.getContentPane().add(logo_panel);
+		logo_panel.setLayout(null);
 		
 		JLabel musvix_logo = new JLabel("");
+		musvix_logo.setBackground(new Color(204, 204, 204));
+		musvix_logo.setBounds(-33, 0, 260, 70);
 		logo_panel.add(musvix_logo);
-		musvix_logo.setIcon(new ImageIcon(main_panel.class.getResource("/panel_glowny/musvix_right_logo.png")));
+		musvix_logo.setIcon(new ImageIcon(main_panel.class.getResource("/panel_glowny/musvix_left_logo.png")));
+		
+		JLabel lblNewLabel = new JLabel("");
+		lblNewLabel.setIcon(new ImageIcon(main_panel.class.getResource("/panel_glowny/logo_left.png")));
+		lblNewLabel.setBounds(224, 0, 56, 70);
+		logo_panel.add(lblNewLabel);
 		
 		
 	}
