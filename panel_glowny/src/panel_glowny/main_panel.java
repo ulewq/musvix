@@ -75,22 +75,85 @@ public class main_panel {
 		change_panel.add(mymusic_panel, "music");
 		
 		JPanel shop_panel = new JPanel();
-		shop_panel.setBackground(new Color(102, 153, 153));
+		shop_panel.setBackground(new Color(200, 226, 234));
 		change_panel.add(shop_panel, "name_22376715666500");
 		shop_panel.setLayout(null);
 		
-		JPanel panel = new JPanel();
-		panel.setBounds(0, 0, 1014, 60);
-		shop_panel.add(panel);
-		panel.setLayout(null);
+		JPanel songalbum_panel = new JPanel();
+		songalbum_panel.setBackground(new Color(144, 197, 214));
+		songalbum_panel.setBounds(0, 0, 1014, 60);
+		shop_panel.add(songalbum_panel);
+		songalbum_panel.setLayout(null);
 		
 		JButton songs_button = new JButton("");
+		songs_button.setIcon(new ImageIcon(main_panel.class.getResource("/panel_glowny/song.png")));
 		songs_button.setBounds(0, 0, 507, 60);
-		panel.add(songs_button);
+		songs_button.setOpaque(false);
+		songs_button.setContentAreaFilled(false);
+		songs_button.setBorderPainted(false);
+		songs_button.setRolloverEnabled(true);
+		songs_button.setRolloverIcon(new ImageIcon(main_panel.class.getResource("/panel_glowny/song-hover.png")));
+		songalbum_panel.add(songs_button);
 		
 		JButton albums_button = new JButton("");
+		albums_button.setIcon(new ImageIcon(main_panel.class.getResource("/panel_glowny/albums.png")));
 		albums_button.setBounds(507, 0, 507, 60);
-		panel.add(albums_button);
+		albums_button.setOpaque(false);
+		albums_button.setContentAreaFilled(false);
+		albums_button.setBorderPainted(false);
+		albums_button.setRolloverEnabled(true);
+		albums_button.setRolloverIcon(new ImageIcon(main_panel.class.getResource("/panel_glowny/albums-hover.png")));
+		songalbum_panel.add(albums_button);
+		
+		JPanel shop_card_panel = new JPanel();
+		shop_card_panel.setBounds(0, 59, 1014, 693);
+		shop_panel.add(shop_card_panel);
+		shop_card_panel.setLayout(new CardLayout(0, 0));
+		
+		
+		JPanel song_panel = new JPanel();
+		shop_card_panel.add(song_panel, "name_29342290723900");
+		song_panel.setLayout(null);
+		
+		JLabel lblSongs = new JLabel("songs");
+		lblSongs.setFont(new Font("Source Sans Pro", Font.PLAIN, 29));
+		lblSongs.setBounds(262, 5, 267, 282);
+		song_panel.add(lblSongs);
+		
+		JPanel albums_panel = new JPanel();
+		shop_card_panel.add(albums_panel, "name_29344868776900");
+		albums_panel.setLayout(null);
+		
+		songs_button.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				shop_card_panel.removeAll();
+				shop_card_panel.repaint();
+				shop_card_panel.revalidate();
+				// TODO Auto-generated method stub
+				shop_card_panel.add(song_panel);
+				shop_card_panel.repaint();
+				shop_card_panel.revalidate();
+				
+			}
+		});
+		
+		albums_button.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				shop_card_panel.removeAll();
+				shop_card_panel.repaint();
+				shop_card_panel.revalidate();
+				// TODO Auto-generated method stub
+				shop_card_panel.add(albums_panel);
+				shop_card_panel.repaint();
+				shop_card_panel.revalidate();
+				
+			}
+		});
+		
+		JLabel lblAlbums = new JLabel("albums");
+		lblAlbums.setFont(new Font("Source Sans Pro", Font.PLAIN, 28));
+		lblAlbums.setBounds(298, 193, 337, 173);
+		albums_panel.add(lblAlbums);
 		
 		JPanel settings_panel = new JPanel();
 		settings_panel.setBackground(new Color(153, 102, 102));
