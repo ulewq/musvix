@@ -20,10 +20,13 @@ import java.awt.Font;
 import javax.swing.JTextArea;
 import javax.swing.JTextPane;
 import java.awt.CardLayout;
+import javax.swing.JList;
+import javax.swing.JTable;
 
 public class main_panel {
 
 	private JFrame frame;
+	private JTable table;
 
 	/**
 	 * Launch the application.
@@ -54,20 +57,21 @@ public class main_panel {
 	 */
 	
 	private void initialize() {
+		
 		frame = new JFrame();
 		frame.setBounds(100, 100, 450, 300);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.setSize(1300,900);
 		frame.setResizable(false);
 		frame.getContentPane().setLayout(null);
-
+	
 		JPanel change_panel = new JPanel();
 		change_panel.setBounds(0, 70, 1294, 752);
 		frame.getContentPane().add(change_panel);
 		change_panel.setLayout(new CardLayout(0, 0));
 		
 		JPanel myacc_panel = new JPanel();
-		myacc_panel.setBackground(new Color(204, 204, 204));
+		myacc_panel.setBackground(new Color(248, 248, 255));
 		change_panel.add(myacc_panel, "account");
 		
 		JPanel mymusic_panel = new JPanel();
@@ -76,7 +80,7 @@ public class main_panel {
 		mymusic_panel.setLayout(null);
 		
 		JPanel panel = new JPanel();
-		panel.setBounds(0, 0, 1014, 60);
+		panel.setBounds(0, 0, 1294, 60);
 		mymusic_panel.add(panel);
 		panel.setLayout(null);
 		
@@ -111,7 +115,7 @@ public class main_panel {
 		panel.add(music_albums_button_1_1);
 		
 		JPanel panel_1 = new JPanel();
-		panel_1.setBounds(0, 60, 1014, 692);
+		panel_1.setBounds(0, 60, 1294, 692);
 		mymusic_panel.add(panel_1);
 		
 		JPanel shop_panel = new JPanel();
@@ -121,7 +125,7 @@ public class main_panel {
 		
 		JPanel songalbum_panel = new JPanel();
 		songalbum_panel.setBackground(new Color(144, 197, 214));
-		songalbum_panel.setBounds(0, 0, 1014, 60);
+		songalbum_panel.setBounds(0, 0, 1294, 60);
 		shop_panel.add(songalbum_panel);
 		songalbum_panel.setLayout(null);
 		
@@ -146,7 +150,7 @@ public class main_panel {
 		songalbum_panel.add(albums_button);
 		
 		JPanel shop_card_panel = new JPanel();
-		shop_card_panel.setBounds(0, 59, 1014, 693);
+		shop_card_panel.setBounds(0, 59, 1294, 693);
 		shop_panel.add(shop_card_panel);
 		shop_card_panel.setLayout(new CardLayout(0, 0));
 		
@@ -159,6 +163,14 @@ public class main_panel {
 		lblSongs.setFont(new Font("Source Sans Pro", Font.PLAIN, 29));
 		lblSongs.setBounds(262, 5, 267, 282);
 		song_panel.add(lblSongs);
+		
+		JList list = new JList();
+		list.setBounds(43, 248, 140, 296);
+		song_panel.add(list);
+		
+		table = new JTable();
+		table.setBounds(376, 248, 313, 282);
+		song_panel.add(table);
 		
 		JPanel albums_panel = new JPanel();
 		shop_card_panel.add(albums_panel, "name_29344868776900");
@@ -373,7 +385,7 @@ public class main_panel {
 		logo_panel.setLayout(null);
 		
 		JLabel musvix_logo = new JLabel("");
-		musvix_logo.setBackground(new Color(204, 204, 204));
+		musvix_logo.setBackground(new Color(248, 248, 255));
 		musvix_logo.setBounds(-33, 0, 260, 70);
 		logo_panel.add(musvix_logo);
 		musvix_logo.setIcon(new ImageIcon(main_panel.class.getResource("/panel_glowny/musvix_left_logo.png")));

@@ -12,6 +12,8 @@ import javax.swing.JPasswordField;
 import javax.swing.JRadioButton;
 
 import login_window.Logingui;
+import panel_glowny.MysqlConnect;
+
 import javax.swing.JLabel;
 import javax.swing.JTextField;
 import javax.swing.UIManager;
@@ -59,6 +61,9 @@ public class login_panel {
 	 * Initialize the contents of the frame.
 	 */
 	private void initialize() {
+		
+		MysqlConnect mysqlConnect = new MysqlConnect();
+		mysqlConnect.connect();
 		frame = new JFrame();
 		frame.getContentPane().setForeground(Color.WHITE);
 		frame.setBackground(Color.WHITE);

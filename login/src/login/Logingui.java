@@ -61,6 +61,7 @@ public class Logingui {
 		frame.setShape(new RoundRectangle2D.Double(1,1, 660,800, 20,20));
 		frame.getContentPane().setLayout(null);
 		
+		
 		JLabel photo_panel = new JLabel("");
 		photo_panel.setIcon(new ImageIcon(Logingui.class.getResource("/login/musvix_15.11.png")));
 		photo_panel.setBounds(0, 23, 660, 600);
