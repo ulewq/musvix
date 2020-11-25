@@ -37,6 +37,7 @@ public class MysqlConnect {
                 connection = DriverManager.getConnection(DATABASE_URL, getProperties());
             } catch (ClassNotFoundException | SQLException e) {
                 e.printStackTrace();
+                e.getCause();
             }
         }
         return connection;

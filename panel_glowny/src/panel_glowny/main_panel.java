@@ -5,16 +5,27 @@ import java.awt.Container;
 import java.awt.EventQueue;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.File;
+import java.io.IOException;
 
+import javax.sound.sampled.LineUnavailableException;
+import javax.sound.sampled.UnsupportedAudioFileException;
 import javax.swing.BorderFactory;
+import javax.swing.ButtonGroup;
 import javax.swing.ButtonModel;
 import javax.swing.Icon;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
+import javax.swing.JFileChooser;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
+import javax.swing.JRadioButton;
 import javax.swing.JSlider;
 import javax.swing.event.ChangeEvent;
+
+import player.Audio;
+import player.Player;
+
 import javax.swing.JLabel;
 import java.awt.Font;
 import javax.swing.JTextArea;
@@ -25,10 +36,13 @@ import javax.swing.JTable;
 import java.awt.SystemColor;
 
 public class main_panel {
-
+	
+	private final ButtonGroup buttonGroup = new ButtonGroup();
 	private JFrame frame;
 	private JTable table;
-
+	private String fullSongPath;
+	private Audio song;
+	
 	/**
 	 * Launch the application.
 	 */
@@ -48,8 +62,9 @@ public class main_panel {
 	/**
 	 * Create the application.
 	 */
-
+	
 	public main_panel() {
+		
 		initialize();
 	}
 
@@ -59,13 +74,14 @@ public class main_panel {
 	
 	private void initialize() {
 		
+		
 		frame = new JFrame();
 		frame.setBounds(100, 100, 450, 300);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.setSize(1300,900);
 		frame.setResizable(false);
 		frame.getContentPane().setLayout(null);
-	
+		
 		JPanel change_panel = new JPanel();
 		change_panel.setBounds(0, 70, 1294, 752);
 		frame.getContentPane().add(change_panel);
@@ -73,7 +89,44 @@ public class main_panel {
 		
 		JPanel myacc_panel = new JPanel();
 		myacc_panel.setBackground(SystemColor.controlHighlight);
+		
 		change_panel.add(myacc_panel, "account");
+		myacc_panel.setLayout(null);
+		
+		JLabel author_image = new JLabel("");
+		author_image.setBounds(619, 5, 235, 279);
+		myacc_panel.add(author_image);
+		
+		JButton changePhotoButton = new JButton("Zmie\u0144 zdj\u0119cie profilowe");
+		changePhotoButton.setFont(new Font("Calibri", Font.BOLD, 14));
+		changePhotoButton.setSize(300, 200);
+		changePhotoButton.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				if(e.getSource() == changePhotoButton) {
+					try {
+					JFileChooser selectPhotoChooser = new JFileChooser();
+					System.out.println(selectPhotoChooser.showOpenDialog(null));
+					int responseFromButton = selectPhotoChooser.showOpenDialog(null);
+						if(responseFromButton == JFileChooser.APPROVE_OPTION) 
+						{
+							File file = new File(selectPhotoChooser.getSelectedFile().getAbsolutePath());
+							String userImage = file.toString();
+							System.out.println(userImage);
+							
+							if(file.getName().endsWith(".jpg") || file.getName().endsWith(".png")) { //warunek ¿e wstawione zostanie tylko zdjecie
+								System.out.println("Otworzono zdjêcie");	
+								author_image.setIcon(new ImageIcon(userImage));
+						}
+						else System.out.println("Nieprawid³owy format pliku");
+						}
+					}
+					catch(Exception e1) {
+						e1.printStackTrace();
+					}
+				}
+			}
+		});
+		myacc_panel.add(changePhotoButton);
 		
 		JPanel mymusic_panel = new JPanel();
 		mymusic_panel.setBackground(new Color(255, 51, 204));
@@ -119,6 +172,52 @@ public class main_panel {
 		JPanel panel_1 = new JPanel();
 		panel_1.setBounds(0, 60, 1294, 692);
 		mymusic_panel.add(panel_1);
+		
+		JButton browse_music = new JButton("browse");
+		browse_music.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				JFileChooser chooser = new JFileChooser();
+				int rVal = chooser.showOpenDialog(frame);
+				if(rVal == JFileChooser.APPROVE_OPTION)
+				{
+					String path = chooser.getCurrentDirectory().toString();
+					String name = chooser.getSelectedFile().getName();
+					fullSongPath = path + "\\" + name;				
+					System.out.println(fullSongPath);
+			
+						//song.close();
+						//playSong(fullSongPath, 0, 0);
+						try {
+							song = new Audio(path);
+						} catch (UnsupportedAudioFileException | IOException | LineUnavailableException e) {
+							// TODO Auto-generated catch block
+							e.printStackTrace();
+						}
+						//song.play(0, 0);
+				}
+			}
+		});
+		
+		JButton browse_music_1 = new JButton("music");
+		browse_music_1.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+							
+								try {
+									song = new Audio("C:\\Users\\Leszek\\Music\\POP SMOKE - GOT IT ON ME.mp3");
+								} catch (UnsupportedAudioFileException | IOException | LineUnavailableException e1) {
+									// TODO Auto-generated catch block
+									e1.printStackTrace();
+								}
+							
+							song.play(0, 0);
+					}
+		});
+		panel_1.add(browse_music_1);
+		panel_1.add(browse_music);
+		
+		JLabel song_name = new JLabel(fullSongPath);
+		
+		panel_1.add(song_name);
 		
 		JPanel panel_2 = new JPanel();
 		panel_2.setBounds(0, 0, 282, 60);
@@ -220,6 +319,9 @@ public class main_panel {
 		JPanel settings_panel = new JPanel();
 		settings_panel.setBackground(new Color(153, 102, 102));
 		change_panel.add(settings_panel, "name_22387308818100");
+		JLabel chooseThemeLabel = new JLabel("Wybierz motyw aplikacji:");
+		chooseThemeLabel.setFont(new Font("Calibri", Font.BOLD, 16));
+		settings_panel.add(chooseThemeLabel);
 		
 		JPanel player_panel = new JPanel();
 		player_panel.setBounds(0, 822, 1294, 43);
@@ -400,11 +502,52 @@ public class main_panel {
 		logo_panel.add(musvix_logo);
 		musvix_logo.setIcon(new ImageIcon(main_panel.class.getResource("/panel_glowny/musvix_left_logo.png")));
 		
-		JLabel lblNewLabel = new JLabel("");
-		lblNewLabel.setIcon(new ImageIcon(main_panel.class.getResource("/panel_glowny/logo_left.png")));
-		lblNewLabel.setBounds(224, 0, 56, 70);
-		logo_panel.add(lblNewLabel);
+		JLabel logo_figure = new JLabel("");
+		logo_figure.setIcon(new ImageIcon(main_panel.class.getResource("/panel_glowny/logo_left.png")));
+		logo_figure.setBounds(224, 0, 56, 70);
+		logo_panel.add(logo_figure);
+		
+		JRadioButton selectLightThemeButton = new JRadioButton("jasny");
+		selectLightThemeButton.addActionListener(new ActionListener() { //zmiana dla jasnego motywu
+			public void actionPerformed(ActionEvent e) {
+				//zmiana koloru wewnetrznego okna
+				chooseThemeLabel.setForeground(new Color(0,0,0));
+				settings_panel.setBackground(new Color(189,192,208)); //panel ustawien - LIGHT THEME
+				myacc_panel.setBackground(new Color(189,192,208));
+				mymusic_panel.setBackground(new Color(189,192,208));
+				shop_panel.setBackground(new Color(189,192,208));
+				//zmiana koloru zewnetrznego okna
+				logo_panel.setBackground(new Color(189,192,208));
+				menu_panel.setBackground(new Color(68,97,240));
+				player_panel.setBackground(new Color(68,97,240));
+				logo_figure.setIcon(new ImageIcon(main_panel.class.getResource("/panel_glowny/logo_right.png")));
+			}
+		});
+		
+		buttonGroup.add(selectLightThemeButton);
+		settings_panel.add(selectLightThemeButton);
+		selectLightThemeButton.setSelected(true);
 		
 		
+		
+		//CIEMNY MOTYW
+		JRadioButton selectDarkThemeButton = new JRadioButton("ciemny");
+		selectDarkThemeButton.addActionListener(new ActionListener() { //zmiana dla ciemnego motywu 
+			public void actionPerformed(ActionEvent e) {
+				//zmiana koloru wewnetrznego okna
+				chooseThemeLabel.setForeground(new Color(255, 255,255));
+				settings_panel.setBackground(new Color(88,63,63)); //panel ustawieñ - DARK THEME
+				myacc_panel.setBackground(new Color(88,63,63));
+				mymusic_panel.setBackground(new Color(88,63,63));
+				shop_panel.setBackground(new Color(88,63,63));
+				//zmiana koloru zewnetrznego okna
+				logo_panel.setBackground(new Color(88,63,63));
+				menu_panel.setBackground(new Color(31, 33, 38));
+				player_panel.setBackground(new Color(192,32,71));
+				logo_figure.setIcon(new ImageIcon(main_panel.class.getResource("/panel_glowny/logo_left.png")));
+			}
+		});
+		buttonGroup.add(selectDarkThemeButton);
+		settings_panel.add(selectDarkThemeButton);
 	}
 }
