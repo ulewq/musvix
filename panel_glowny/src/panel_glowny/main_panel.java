@@ -1,8 +1,10 @@
 package panel_glowny;
 
+import java.awt.CardLayout;
 import java.awt.Color;
-import java.awt.Container;
 import java.awt.EventQueue;
+import java.awt.Font;
+import java.awt.SystemColor;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.File;
@@ -10,38 +12,33 @@ import java.io.IOException;
 
 import javax.sound.sampled.LineUnavailableException;
 import javax.sound.sampled.UnsupportedAudioFileException;
-import javax.swing.BorderFactory;
 import javax.swing.ButtonGroup;
-import javax.swing.ButtonModel;
-import javax.swing.Icon;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFileChooser;
 import javax.swing.JFrame;
+import javax.swing.JLabel;
+import javax.swing.JList;
 import javax.swing.JPanel;
 import javax.swing.JRadioButton;
+import javax.swing.JSeparator;
 import javax.swing.JSlider;
-import javax.swing.event.ChangeEvent;
-
-import player.Audio;
-import player.Player;
-
-import javax.swing.JLabel;
-import java.awt.Font;
-import javax.swing.JTextArea;
-import javax.swing.JTextPane;
-import java.awt.CardLayout;
-import javax.swing.JList;
 import javax.swing.JTable;
-import java.awt.SystemColor;
+import javax.swing.SwingConstants;
+import javax.swing.event.ChangeEvent;
+import javax.swing.event.ChangeListener;
 
-public class main_panel {
-	
+public class main_panel implements ChangeListener {
+	private boolean isPaused = false;
+	private boolean isFirst = true;
+	private int framePos = 0;
+	private float volume = -20.0f;
 	private final ButtonGroup buttonGroup = new ButtonGroup();
 	private JFrame frame;
 	private JTable table;
 	private String fullSongPath;
 	private Audio song;
+	private final JSeparator separator = new JSeparator();
 	
 	/**
 	 * Launch the application.
@@ -169,11 +166,98 @@ public class main_panel {
 		music_arthist_button.setIcon(new ImageIcon(main_panel.class.getResource("/panel_glowny/artists_m.png")));
 		music_arthist_button.setRolloverIcon(new ImageIcon(main_panel.class.getResource("/panel_glowny/artists_m-hover.png")));
 		
+		JPanel player_panel = new JPanel();
+		player_panel.setBounds(0, 822, 1294, 43);
+		frame.getContentPane().add(player_panel);
+		player_panel.setBackground(new Color(250, 250, 250));
+		player_panel.setLayout(null);
+		
+		JButton rewind_button = new JButton("");
+		rewind_button.setBounds(49, 3, 37, 37);
+		player_panel.add(rewind_button);
+		rewind_button.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+			}
+		});
+		rewind_button.setBorderPainted(false);
+		rewind_button.setOpaque(false);
+		rewind_button.setContentAreaFilled(false);
+		rewind_button.setIcon(new ImageIcon(main_panel.class.getResource("/panel_glowny/back.png")));
+		
+		
+		
+		JButton forward_button = new JButton("");
+		forward_button.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				
+			}
+		});
+		forward_button.setIcon(new ImageIcon(main_panel.class.getResource("/panel_glowny/next.png")));
+		forward_button.setOpaque(false);
+		forward_button.setContentAreaFilled(false);
+		forward_button.setBorderPainted(false);
+		forward_button.setBounds(179, 3, 37, 37);
+		player_panel.add(forward_button);
+		
+		JSlider music_time_slider = new JSlider();
+		music_time_slider.setBounds(278, 9, 650, 26);
+		music_time_slider.setValue(0);
+		player_panel.add(music_time_slider);
+		
+		JLabel time_song_label = new JLabel("0:00/1:00");
+		time_song_label.setFont(new Font("Source Sans Pro", Font.BOLD, 13));
+		time_song_label.setBounds(940, 8, 67, 22);
+		player_panel.add(time_song_label);
+		
+		JSlider volume_slider = new JSlider(-75,5,-20);
+		volume_slider.setBounds(1082, 8, 200, 26);
+		player_panel.add(volume_slider);
+		volume_slider.addChangeListener(this);
+		
+		JLabel speaker_image = new JLabel("");
+
+		if (volume_slider.getValue()==0)
+		{
+		speaker_image.setIcon(new ImageIcon(main_panel.class.getResource("/panel_glowny/unvolume.png")));
+		}
+		else
+		{
+		speaker_image.setIcon(new ImageIcon(main_panel.class.getResource("/panel_glowny/volume.png")));
+		}
+		
+		speaker_image.setBounds(1040, 8, 30, 30);
+		player_panel.add(speaker_image);
+		JButton playpause_button = new JButton("");
+		playpause_button.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				if (!isPaused)
+				{
+					framePos = song.getFramePosition();
+					song.stop();
+					playpause_button.setIcon(new ImageIcon(main_panel.class.getResource("/panel_glowny/play.png")));
+					isPaused = true;
+				}
+				else
+				{
+					song.playAfterPause(framePos);
+					playpause_button.setIcon(new ImageIcon(main_panel.class.getResource("/panel_glowny/pause.png")));
+					isPaused = false;
+				}
+			}
+		});
+		playpause_button.setIcon(new ImageIcon(main_panel.class.getResource("/panel_glowny/play.png")));
+		playpause_button.setOpaque(false);
+		playpause_button.setContentAreaFilled(false);
+		playpause_button.setBorderPainted(false);
+		playpause_button.setBounds(119, 3, 37, 37);
+		player_panel.add(playpause_button);
+		
 		JPanel panel_1 = new JPanel();
 		panel_1.setBounds(0, 60, 1294, 692);
 		mymusic_panel.add(panel_1);
 		
 		JButton browse_music = new JButton("browse");
+		browse_music.setBounds(591, 234, 75, 25);
 		browse_music.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				JFileChooser chooser = new JFileChooser();
@@ -198,26 +282,120 @@ public class main_panel {
 			}
 		});
 		
-		JButton browse_music_1 = new JButton("music");
-		browse_music_1.addActionListener(new ActionListener() {
+		JButton play_music = new JButton("play");
+		play_music.setBounds(10, 10, 70, 30);
+		play_music.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-							
-								try {
-									song = new Audio("C:\\Users\\Leszek\\Music\\POP SMOKE - GOT IT ON ME.mp3");
-								} catch (UnsupportedAudioFileException | IOException | LineUnavailableException e1) {
-									// TODO Auto-generated catch block
-									e1.printStackTrace();
-								}
-							
-							song.play(0, 0);
+				
+					
+					if (!isFirst)
+					{
+					song.close();
+					isFirst = false;
+					}
+					else
+					{
+					isFirst = false;
+					}
+					try {
+						song = new Audio("C:\\Users\\Leszek\\Music\\POP SMOKE - GOT IT ON ME.mp3");
+					} catch (UnsupportedAudioFileException | IOException | LineUnavailableException e1) {
+						// TODO Auto-generated catch block
+						e1.printStackTrace();
+					}
+					playpause_button.setIcon(new ImageIcon(main_panel.class.getResource("/panel_glowny/pause.png")));
+					song.play(volume, framePos);
+					
 					}
 		});
-		panel_1.add(browse_music_1);
+		panel_1.setLayout(null);
+		panel_1.add(play_music);
 		panel_1.add(browse_music);
 		
-		JLabel song_name = new JLabel(fullSongPath);
+		JLabel song_name = new JLabel("POP SMOKE - GOT IT ON ME");
+		song_name.setFont(new Font("Source Sans Pro", Font.BOLD, 21));
+		song_name.setBounds(129, 10, 507, 35);
 		
 		panel_1.add(song_name);
+		
+		JLabel song_name2 = new JLabel("Skepta ft. JME - That's Not Me");
+		song_name2.setFont(new Font("Source Sans Pro", Font.BOLD, 20));
+		song_name2.setBounds(129, 72, 486, 30);
+		panel_1.add(song_name2);
+		separator.setBackground(Color.BLACK);
+		separator.setBounds(0, 50, 1294, 9);
+		panel_1.add(separator);
+		
+		JButton play_music_1 = new JButton("play");
+		play_music_1.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				if (!isFirst)
+				{
+				song.close();
+				}
+				else
+				{
+				isFirst = false;
+				}
+				try {
+					song = new Audio("C:\\Users\\Leszek\\Music\\Skepta ft. JME - Thats Not Me.mp3");
+				} catch (UnsupportedAudioFileException | IOException | LineUnavailableException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
+				playpause_button.setIcon(new ImageIcon(main_panel.class.getResource("/panel_glowny/pause.png")));
+				song.play(volume, framePos);
+				
+				}
+		});
+		play_music_1.setBounds(10, 72, 70, 30);
+		panel_1.add(play_music_1);
+		
+		JSeparator separator2 = new JSeparator();
+		separator2.setBackground(Color.BLACK);
+		separator2.setBounds(0, 112, 1294, 9);
+		panel_1.add(separator2);
+		
+		JButton play_music_1_1 = new JButton("play");
+		play_music_1_1.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				if (!isFirst)
+				{
+				song.close();
+				}
+				else
+				{
+				isFirst = false;
+				}
+				try {
+					song = new Audio("C:\\Users\\Leszek\\Music\\Dutchavelli - Bando Diaries.mp3");
+				} catch (UnsupportedAudioFileException | IOException | LineUnavailableException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
+				playpause_button.setIcon(new ImageIcon(main_panel.class.getResource("/panel_glowny/pause.png")));
+				song.play(volume, framePos);
+				
+				}
+		});
+		play_music_1_1.setBounds(10, 134, 70, 30);
+		panel_1.add(play_music_1_1);
+		
+		JSeparator separator3 = new JSeparator();
+		separator3.setBackground(Color.BLACK);
+		separator3.setBounds(0, 174, 1294, 9);
+		panel_1.add(separator3);
+		
+		JSeparator separator_vertical = new JSeparator();
+		separator_vertical.setOrientation(SwingConstants.VERTICAL);
+		separator_vertical.setBackground(Color.BLACK);
+		separator_vertical.setBounds(92, 0, 25, 175);
+		panel_1.add(separator_vertical);
+		
+		JLabel song_name3 = new JLabel("Dutchavelli - Bando Diaries");
+		song_name3.setFont(new Font("Source Sans Pro", Font.BOLD, 20));
+		song_name3.setBounds(129, 122, 293, 35);
+		panel_1.add(song_name3);
 		
 		JPanel panel_2 = new JPanel();
 		panel_2.setBounds(0, 0, 282, 60);
@@ -323,70 +501,7 @@ public class main_panel {
 		chooseThemeLabel.setFont(new Font("Calibri", Font.BOLD, 16));
 		settings_panel.add(chooseThemeLabel);
 		
-		JPanel player_panel = new JPanel();
-		player_panel.setBounds(0, 822, 1294, 43);
-		frame.getContentPane().add(player_panel);
-		player_panel.setBackground(new Color(250, 250, 250));
-		player_panel.setLayout(null);
 		
-		JButton rewind_button = new JButton("");
-		rewind_button.setBounds(49, 3, 37, 37);
-		player_panel.add(rewind_button);
-		rewind_button.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent arg0) {
-			}
-		});
-		rewind_button.setBorderPainted(false);
-		rewind_button.setOpaque(false);
-		rewind_button.setContentAreaFilled(false);
-		rewind_button.setIcon(new ImageIcon(main_panel.class.getResource("/panel_glowny/back.png")));
-		
-		JButton playpause_button = new JButton("");
-		playpause_button.setIcon(new ImageIcon(main_panel.class.getResource("/panel_glowny/play.png")));
-		playpause_button.setOpaque(false);
-		playpause_button.setContentAreaFilled(false);
-		playpause_button.setBorderPainted(false);
-		playpause_button.setBounds(119, 3, 37, 37);
-		player_panel.add(playpause_button);
-		
-		JButton forward_button = new JButton("");
-		forward_button.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent arg0) {
-				
-			}
-		});
-		forward_button.setIcon(new ImageIcon(main_panel.class.getResource("/panel_glowny/next.png")));
-		forward_button.setOpaque(false);
-		forward_button.setContentAreaFilled(false);
-		forward_button.setBorderPainted(false);
-		forward_button.setBounds(179, 3, 37, 37);
-		player_panel.add(forward_button);
-		
-		JSlider music_time_slider = new JSlider();
-		music_time_slider.setBounds(278, 9, 650, 26);
-		music_time_slider.setValue(0);
-		player_panel.add(music_time_slider);
-		
-		JLabel time_song_label = new JLabel("0:00/1:00");
-		time_song_label.setFont(new Font("Source Sans Pro", Font.BOLD, 13));
-		time_song_label.setBounds(940, 8, 67, 22);
-		player_panel.add(time_song_label);
-		
-		JSlider volume_slider = new JSlider();
-		volume_slider.setBounds(1082, 8, 200, 26);
-		player_panel.add(volume_slider);
-		
-		JLabel speaker_image = new JLabel("New");
-		if (volume_slider.getValue()==0)
-		{
-		speaker_image.setIcon(new ImageIcon(main_panel.class.getResource("/panel_glowny/unvolume.png")));
-		}
-		else
-		{
-		speaker_image.setIcon(new ImageIcon(main_panel.class.getResource("/panel_glowny/volume.png")));
-		}
-		speaker_image.setBounds(1040, 8, 30, 30);
-		player_panel.add(speaker_image);
 		
 		JPanel menu_panel = new JPanel();
 		menu_panel.setBounds(280, 0, 1014, 70);
@@ -550,4 +665,14 @@ public class main_panel {
 		buttonGroup.add(selectDarkThemeButton);
 		settings_panel.add(selectDarkThemeButton);
 	}
+
+	@Override
+	public void stateChanged(ChangeEvent e) {
+       
+		JSlider source = (JSlider)e.getSource();
+        volume = source.getValue();    
+        song.changeVolume(volume);
+       
+	}
+	
 }
