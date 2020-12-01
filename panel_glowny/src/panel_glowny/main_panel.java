@@ -28,6 +28,10 @@ import javax.swing.SwingConstants;
 import javax.swing.event.ChangeEvent;
 import javax.swing.event.ChangeListener;
 
+import login.MysqlConnect;
+
+import javax.swing.JProgressBar;
+
 public class main_panel implements ChangeListener {
 	private boolean isPaused = false;
 	private boolean isFirst = true;
@@ -70,6 +74,9 @@ public class main_panel implements ChangeListener {
 	 */
 	
 	private void initialize() {
+		
+		MysqlConnect mysqlConnect = new MysqlConnect();
+		mysqlConnect.connect();
 		
 		
 		frame = new JFrame();
@@ -199,11 +206,6 @@ public class main_panel implements ChangeListener {
 		forward_button.setBounds(179, 3, 37, 37);
 		player_panel.add(forward_button);
 		
-		JSlider music_time_slider = new JSlider();
-		music_time_slider.setBounds(278, 9, 650, 26);
-		music_time_slider.setValue(0);
-		player_panel.add(music_time_slider);
-		
 		JLabel time_song_label = new JLabel("0:00/1:00");
 		time_song_label.setFont(new Font("Source Sans Pro", Font.BOLD, 13));
 		time_song_label.setBounds(940, 8, 67, 22);
@@ -251,6 +253,10 @@ public class main_panel implements ChangeListener {
 		playpause_button.setBorderPainted(false);
 		playpause_button.setBounds(119, 3, 37, 37);
 		player_panel.add(playpause_button);
+		
+		JProgressBar progressBar = new JProgressBar();
+		progressBar.setBounds(261, 8, 654, 27);
+		player_panel.add(progressBar);
 		
 		JPanel panel_1 = new JPanel();
 		panel_1.setBounds(0, 60, 1294, 692);
@@ -674,5 +680,4 @@ public class main_panel implements ChangeListener {
         song.changeVolume(volume);
        
 	}
-	
 }

@@ -5,5 +5,6 @@
 	<classpathentry kind="lib" path="C:/git/projekt_music_studio/panel_glowny/Libs/jl1.0.1.jar"/>
 	<classpathentry kind="lib" path="C:/git/projekt_music_studio/panel_glowny/Libs/mp3spi1.9.5.jar"/>
 	<classpathentry kind="lib" path="C:/git/projekt_music_studio/panel_glowny/Libs/tritonus_share.jar"/>
+	<classpathentry kind="lib" path="C:/git/projekt_music_studio/panel_glowny/Libs/mysql-connector-java-5.1.4-bin.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>

@@ -7,6 +7,7 @@ import java.util.Properties;
 
 public class MysqlConnect {
     // init database constants
+	
     private static final String DATABASE_DRIVER = "com.mysql.jdbc.Driver";
     private static final String DATABASE_URL = "jdbc:mysql://192.166.219.220/musvix";
     private static final String USERNAME = "musv";
