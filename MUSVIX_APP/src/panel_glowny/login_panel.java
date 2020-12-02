@@ -66,6 +66,9 @@ public class login_panel {
 	 */
 	private void initialize() {
 		
+		MysqlConnect mysqlConnect = new MysqlConnect();
+		mysqlConnect.connect();
+		
 		frame = new JFrame();
 		frame.getContentPane().setForeground(Color.WHITE);
 		frame.setBackground(Color.WHITE);
